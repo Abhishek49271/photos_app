@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+const inter = { className: 'my-class' };
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,15 +22,32 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <div className="border-b">
+          <div className="flex h-16 items-center px-4 container mx-auto">
+            Photos
+            <div className="ml-auto flex items-center space-x-4">
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex">
+          {/* <SideMenu /> */}
+
+          <div className="w-full px-4 pt-8">{children}</div>
+        </div>
       </body>
     </html>
   );
